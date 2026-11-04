@@ -1,0 +1,28 @@
+
+name: TalentFlow AI Daily Workflow
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 7 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  run-talentflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run TalentFlow demo
+        run: python automation/daily_workflow.py --demo
